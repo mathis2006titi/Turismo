@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="propos" class="section about-section">
+  <div class="about-inner">
+    <div class="about-text">
+      <h2>À propos de moi</h2>
+      <p>
+        Je m’appelle Mathis Durand Cullerier, j’ai 19 ans et je suis actuellement en 2ᵉ année du cycle prépa à l’ESIEA, spécialisé en informatique.
+      </p>
+      <p>
+        En parallèle de mes études, je suis engagé dans les Scouts et Guides de France en tant que responsable Louveteaux Jeanettes 
+        (30 jeunes de 8 à 11 ans). Cela m’a permis de développer des compétences importantes : autonomie, sens de l’organisation,
+         leadership, et surtout une capacité à gérer et motiver une équipe de jeunes.
+      </p>
+      <p>
+        Je cherche un stage rémunéré ou un contrat à durée déterminé pour l’été 2026, afin de mettre à profit mon énergie, mon sens du terrain et ma soif d’apprentissage 
+        dans un cadre exigeant et innovant comme celui de Turismo.
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="{{ url_for('static', filename='images/photo_de_profil.png') }}" alt="Photo de Mathis">
+    </div>
+  </div>
+</section>
+
+<section id="3mots" class="section philosophy-section">
+  <h2>Ma philosophie en 3 mots</h2>
+  <div class="three-words">
+    <div class="word-box">
+      <h3>Apprendre</h3>
+    </div>
+    <div class="word-box">
+      <h3>Travailler</h3>
+    </div>
+    <div class="word-box">
+      <h3>Progresser</h3>
+    </div>
+  </div>
+</section>
+
+<section id="documents" class="section documents-section">
+  <h2>Documents </h2>
+  <ul class="doc-list">
+    {% for pdf in pdfs %}
+      <li>
+        <span class="doc-name">{{ pdf }}</span>
+        <a class="btn-download" href="{{ url_for('download', filename=pdf) }}">Télécharger</a>
+      </li>
+    {% else %}
+      <li class="no-file">Aucun document</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section id="photos" class="section portfolio-section">
+  <h2>Photos</h2>
+  <div class="grid-images">
+    {% for img in images %}
+      <div class="grid-item">
+        <a href="{{ url_for('static', filename='uploads/' + img) }}" target="_blank">
+          <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="Projet image">
+        </a>
+      </div>
+    {% else %}
+      <li class="no-file">Aucune image pour le moment.</li>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="3mots-video" class="section media-section">
+  <h2>Ma philosophie en vidéo</h2>
+  {% if video %}
+    <div class="video-container">
+      <video controls class="video-player">
+        <source src="{{ url_for('static', filename='uploads/' + video) }}" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
+    </div>
+  {% else %}
+    <p class="no-file">Aucune vidéo pour le moment.</p>
+  {% endif %}
+</section>
+
+<section id="voiture" class="section car-section">
+  <h2>Si j'avais 1 voiture que j'ajouterais à l'abonnement, c'est …</h2>
+  <div class="car-photo">
+    <a href="https://www.ford.fr/achat-voiture/buy-online/build-your-ford/mec-ice?catalogId=WAEFX-CZJ-2026-MustangFRA202600&config=fr_FR%2CWAEFX-CZJ-2026-MustangFRA202600%2CACMRU_VS-JZ%2CBS-BJ%2CDGADU_DR--B_EN-WU_TR-EX%2CPNYW3%2C12AJA%2CFBBBF&customerType=private&planId=c#series" target="_blank">
+      <img src="{{ url_for('static', filename='images/ford_dark_house.png') }}" alt="Ford Dark House">
+    </a>
+  </div>
+  <div class="car-details">
+    <div class="detail-card">
+      <span class="icon">🚗</span>
+      <span class="text">Nom : Ford Dark House</span>
+    </div>
+    <div class="detail-card">
+      <span class="icon">💰</span>
+      <span class="text">Prix : 72 250€</span>
+    </div>
+    <div class="detail-card">
+      <span class="icon">⚡</span>
+      <span class="text">Puissance : 453 ch</span>
+    </div>
+    <div class="detail-card">
+      <span class="icon">🔋</span>
+      <span class="text">Motorisation : 5.0l Ti V8 Manuelle</span>
+    </div>
+    <div class="detail-card">
+      <span class="icon">⏱️</span>
+      <span class="text">0-100 km/h : 5.2 s</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section contact-section">
+  <h2>Informations de contact</h2>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Prénom / Nom</h3>
+      <p>MAthis DURAND CULLERIER</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Age</h3>
+      <p>19 ans</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Téléphone</h3>
+      <p>+33 (0)7 63 62 85 34</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Email personnel</h3>
+      <p>mathis.durand.cullerier@gmail.com</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Email scolaire</h3>
+      <p>durandcullerier@et.esiea.fr</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Localisation</h3>
+      <p>Essonne Île-de-France France</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Permis & mobilité</h3>
+      <p>Permis B & véhiculé</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Profil LinkedIn</h3>
+      <a target="_blank" href="https://www.linkedin.com/in/mathis-durand-cullerier/">Mathis DURAND CULLERIER</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="3mots" class="section philosophy-section">
+  <h2>En espérant pouvoir un jour entendre ensemble le son unique d’une de vos voitures. </h2>
+  <br>
+  <p>Cordialement,</p>
+  <p>Mathis DURAND CULLERIER</p>
+</section>
+
+
+<section class="section upload-section">
+  <h2>Ajouter un fichier</h2>
+  <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" class="file-input">
+    <button type="submit" class="btn-upload">Téléverser</button>
+  </form>
+</section>
+
+
+
+
+{% endblock %}

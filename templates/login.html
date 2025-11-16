@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès sécurisé</title>
+    <style>
+        body {
+            background: #0A1A2F;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: #111;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 15px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #D62828;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #b31f20;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Entrer le mot de passe</h2>
+
+    <form method="POST">
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <button type="submit">Valider</button>
+    </form>
+
+    {% if get_flashed_messages() %}
+        <p style="color: #D62828; margin-top: 15px;">
+            {{ get_flashed_messages()[0] }}
+        </p>
+    {% endif %}
+</div>
+
+</body>
+</html>
