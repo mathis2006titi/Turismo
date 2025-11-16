@@ -109,9 +109,15 @@ def delete(filename):
         flash("Fichier non trouvé.")
     return redirect(url_for('index'))
 
+
+
 import smtplib
 from email.message import EmailMessage
 from flask import request, flash, redirect, url_for
+
+
+EMAIL_ADDRESS = "cocotte3euros@gmail.com"
+EMAIL_PASSWORD = "zdhv qoex tztc zzxo "
 
 @app.route('/send_email', methods=['POST'])
 def send_email():
@@ -125,7 +131,7 @@ def send_email():
     msg.set_content("Bonjour,\n\nVeuillez trouver en pièce jointe mon CV et ma lettre de motivation.\n\nCordialement,\nMathis Durand Cullerier")
     
     # Pièces jointes
-    for filename in ['CV_Mathis_DURAND_CULLERIER.pdf', 'Lettre_Motivation.pdf']:
+    for filename in ['CV_Mathis_DURAND_CULLERIER.pdf']:
         path = os.path.join('static/uploads', filename)
         with open(path, 'rb') as f:
             file_data = f.read()
