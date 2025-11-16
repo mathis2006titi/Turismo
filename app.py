@@ -2,21 +2,26 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory, flash, session
 from werkzeug.utils import secure_filename
 
+# ------------------------------
+# Config
+# ------------------------------
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXT = {'pdf', 'png', 'jpg', 'jpeg', 'mp4', 'mov'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.secret_key = 'change_this_secret_key'  # change-la en production !
 
+# SECRET_KEY sécurisé pour Render via variable d'environnement
+app.secret_key = os.environ.get("SECRET_KEY", "change_this_secret_key")
+
+# Création du dossier d'uploads si inexistant
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # ------------------------------
-# Vérification des fichiers autorisés
+# Fonction utilitaire pour vérifier les fichiers autorisés
 # ------------------------------
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXT
-
 
 # ------------------------------
 # Page de login avant accès
@@ -35,7 +40,6 @@ def login():
 
     return render_template('login.html')
 
-
 # ------------------------------
 # Page d'accueil protégée
 # ------------------------------
@@ -45,14 +49,12 @@ def index():
         return redirect(url_for('login'))
 
     files = os.listdir(app.config['UPLOAD_FOLDER'])
-
     pdfs = [f for f in files if f.lower().endswith('pdf')]
     images = [f for f in files if f.lower().endswith(('png', 'jpg', 'jpeg'))]
     videos = [f for f in files if f.lower().endswith(('mp4', 'mov'))]
     first_video = videos[0] if videos else None
 
     return render_template('index.html', pdfs=pdfs, images=images, video=first_video)
-
 
 # ------------------------------
 # Upload de fichiers
@@ -81,7 +83,6 @@ def upload():
 
     return redirect(url_for('index'))
 
-
 # ------------------------------
 # Téléchargement des fichiers
 # ------------------------------
@@ -92,10 +93,9 @@ def download(filename):
 
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
-
 # ------------------------------
-# Lancement serveur
+# Lancement serveur local
 # ------------------------------
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
