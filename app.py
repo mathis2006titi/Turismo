@@ -93,13 +93,21 @@ def download(filename):
 
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
+# ------------------------------
+# SUPPRESSION TEMPORAIRE D'UN FICHIER
+# ------------------------------
 @app.route('/delete/<filename>')
 def delete(filename):
+    if not session.get('authenticated'):
+        return redirect(url_for('login'))
+
     path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     if os.path.exists(path):
         os.remove(path)
-        return f"{filename} supprimé"
-    return "Fichier non trouvé"
+        flash(f"{filename} a été supprimé avec succès.")
+    else:
+        flash("Fichier non trouvé.")
+    return redirect(url_for('index'))
 
 
 
