@@ -109,6 +109,39 @@ def delete(filename):
         flash("Fichier non trouvé.")
     return redirect(url_for('index'))
 
+import smtplib
+from email.message import EmailMessage
+from flask import request, flash, redirect, url_for
+
+@app.route('/send_email', methods=['POST'])
+def send_email():
+    recipient = request.form['email']
+    
+    # Création du message
+    msg = EmailMessage()
+    msg['Subject'] = "Mes informations de contact"
+    msg['From'] = os.environ.get("cocotte3euros@gmail.com")  # ton email Gmail
+    msg['To'] = recipient
+    msg.set_content("Bonjour,\n\nVeuillez trouver en pièce jointe mon CV et ma lettre de motivation.\n\nCordialement,\nMathis Durand Cullerier")
+    
+    # Pièces jointes
+    for filename in ['CV_Mathis_DURAND_CULLERIER.pdf', 'Lettre_Motivation.pdf']:
+        path = os.path.join('static/docs', filename)
+        with open(path, 'rb') as f:
+            file_data = f.read()
+            file_name = filename
+        msg.add_attachment(file_data, maintype='application', subtype='pdf', filename=file_name)
+    
+    # Envoi via Gmail SMTP
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(os.environ.get("EMAIL_ADDRESS"), os.environ.get("EMAIL_PASSWORD"))
+            smtp.send_message(msg)
+        flash("Email envoyé avec succès ! Vérifiez votre boîte de réception.")
+    except Exception as e:
+        flash(f"Erreur lors de l'envoi de l'email : {e}")
+    
+    return redirect(url_for('index'))
 
 
 # ------------------------------

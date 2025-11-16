@@ -324,3 +324,40 @@ body {
 .contact-card a:hover {
   opacity: 0.8;
 }
+
+
+.newsletter-form {
+  display: flex;
+  flex-direction: row;
+  max-width: 400px;
+  margin: auto;
+}
+
+.newsletter-form input[type="email"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid #ccc;
+}
+
+.newsletter-form button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #2ed628;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0 6px 6px 0;
+  transition: background 0.3s;
+}
+
+.newsletter-form button:hover {
+  background-color: #24b11d;
+}
+
+.flash-messages {
+  list-style: none;
+  text-align: center;
+  margin-top: 10px;
+  color: #ff4d4d;
+}

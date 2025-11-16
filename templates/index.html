@@ -118,7 +118,7 @@
   <div class="contact-grid">
     <div class="contact-card">
       <h3>Prénom / Nom</h3>
-      <p>MAthis DURAND CULLERIER</p>
+      <p>Mathis DURAND CULLERIER</p>
     </div>
 
     <div class="contact-card">
@@ -158,6 +158,24 @@
 
   </div>
 </section>
+
+<section id="newsletter" class="section contact-section">
+  <h2>Recevez mon CV et ma lettre de motivation</h2>
+  <form action="{{ url_for('send_email') }}" method="POST" class="newsletter-form">
+    <input type="email" name="email" placeholder="Votre email" required>
+    <button type="submit">Recevoir</button>
+  </form>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flash-messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</section>
+
 
 <section id="3mots" class="section philosophy-section">
   <h2>En espérant pouvoir un jour entendre ensemble le son unique d’une de vos voitures. </h2>
