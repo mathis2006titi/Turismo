@@ -93,6 +93,16 @@ def download(filename):
 
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
+@app.route('/delete/<filename>')
+def delete(filename):
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if os.path.exists(path):
+        os.remove(path)
+        return f"{filename} supprimé"
+    return "Fichier non trouvé"
+
+
+
 # ------------------------------
 # Lancement serveur local
 # ------------------------------
