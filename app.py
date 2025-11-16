@@ -120,13 +120,13 @@ def send_email():
     # Création du message
     msg = EmailMessage()
     msg['Subject'] = "Mes informations de contact"
-    msg['From'] = os.environ.get("cocotte3euros@gmail.com")  # ton email Gmail
+    msg['From'] = os.environ.get("EMAIL_ADDRESS") 
     msg['To'] = recipient
     msg.set_content("Bonjour,\n\nVeuillez trouver en pièce jointe mon CV et ma lettre de motivation.\n\nCordialement,\nMathis Durand Cullerier")
     
     # Pièces jointes
     for filename in ['CV_Mathis_DURAND_CULLERIER.pdf', 'Lettre_Motivation.pdf']:
-        path = os.path.join('static/docs', filename)
+        path = os.path.join('static/uploads', filename)
         with open(path, 'rb') as f:
             file_data = f.read()
             file_name = filename
