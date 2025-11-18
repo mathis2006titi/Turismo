@@ -89,7 +89,7 @@ from flask import request, flash, redirect, url_for
 
 
 EMAIL_ADDRESS = "cocotte3euros@gmail.com"
-EMAIL_PASSWORD = "zdhv qoex tztc zzxo "
+EMAIL_PASSWORD = "zdhv qoex tztc zzxo"
 
 @app.route('/send_email', methods=['POST'])
 def send_email():

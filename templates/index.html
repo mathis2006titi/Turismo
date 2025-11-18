@@ -112,6 +112,23 @@
   </div>
 </section>
 
+<section id="newsletter" class="section contact-section">
+  <h2>Recevez mon CV et ma lettre de motivation</h2>
+  <form action="{{ url_for('send_email') }}" method="POST" class="newsletter-form">
+    <input type="email" name="email" placeholder="Votre email" required>
+    <button type="submit">Recevoir</button>
+</form> 
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flash-messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</section>
+
 <section id="contact" class="section contact-section">
   <h2>Informations de contact</h2>
 
@@ -157,25 +174,6 @@
     </div>
 
   </div>
-</section>
-
-<section id="newsletter" class="section contact-section">
-  <h2>Recevez mon CV et ma lettre de motivation</h2>
-  <form action="{{ url_for('send_email') }}" method="POST" class="newsletter-form">
-    <input type="email" name="email" placeholder="Votre email" required>
-    <button type="submit">Recevoir</button>
-</form>
-
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class="flash-messages">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
 </section>
 
 
