@@ -106,7 +106,7 @@ def send_email():
     
     # Pièces jointes
     for filename in ['CV_Mathis_DURAND_CULLERIER.pdf']:
-        path = os.path.join('static/docs', filename)
+        path = os.path.join('static/uploads', filename)
         with open(path, 'rb') as f:
             file_data = f.read()
         msg.add_attachment(file_data, maintype='application', subtype='pdf', filename=filename)

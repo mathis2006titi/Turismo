@@ -117,7 +117,7 @@
   <form action="{{ url_for('send_email') }}" method="POST" class="newsletter-form">
     <input type="email" name="email" placeholder="Votre email" required>
     <button type="submit">Recevoir</button>
-</form> 
+  </form> 
   {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class="flash-messages">
